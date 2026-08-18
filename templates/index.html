@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="/static/mywebscript.js"></script>
+    <title>Emotion Detector</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-body">
+                <h1 class="text-center">NLP - Emotion Detection</h1>
+                <div class="p-4">
+                    <label for="textToAnalyze" class="form-label">Please enter the text to be analyzed</label>
+                    <input type="text" class="form-control" id="textToAnalyze">
+                    <button onclick="RunSentimentAnalysis()" class="btn btn-secondary mt-4">Run Sentiment Analysis</button>
+                </div>
+                <h2 class="px-4">Result of Emotion Detection</h2>
+                <div id="system_response" class="p-4"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
