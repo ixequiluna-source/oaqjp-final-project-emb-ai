@@ -1,6 +1,8 @@
-# Emotion Detector Final Project
+# Final Project
 
-Final project for the IBM/Coursera Python Project for AI & Application Development course.
+## Emotion Detector
+
+Final Project for the IBM/Coursera Python Project for AI & Application Development course.
 
 This project implements an AI-powered emotion detector using the Watson NLP Skills Network endpoint, packages the functionality as `EmotionDetection`, validates it with unit tests, deploys it with Flask, handles blank-input errors, and includes static code analysis.
 
