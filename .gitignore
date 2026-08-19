@@ -1,0 +1,4 @@
+.venv/
+.pylint.d/
+__pycache__/
+*.py[cod]

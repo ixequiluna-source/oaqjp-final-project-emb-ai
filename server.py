@@ -1,8 +1,9 @@
 """Flask server for the emotion detection web application."""
 
 from flask import Flask, render_template, request
+from requests.exceptions import RequestException
 
-from EmotionDetection import emotion_detector
+from EmotionDetection.emotion_detection import emotion_detector
 
 app = Flask(__name__)
 
@@ -17,7 +18,10 @@ def render_index_page():
 def emotion_detector_route():
     """Analyze the supplied text and return a formatted result."""
     text_to_analyze = request.args.get("textToAnalyze", "")
-    response = emotion_detector(text_to_analyze)
+    try:
+        response = emotion_detector(text_to_analyze)
+    except RequestException:
+        return "Emotion detection service unavailable. Please try again later!", 503
 
     if response["dominant_emotion"] is None:
         return "Invalid text! Please try again!"
