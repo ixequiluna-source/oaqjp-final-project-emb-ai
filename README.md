@@ -6,8 +6,9 @@ This project implements an AI-powered emotion detector using the Watson NLP Skil
 
 ## Files
 
-- `EmotionDetection/emotion_detection.py`
-- `EmotionDetection/__init__.py`
+- `emotion_detection.py` – top-level compatibility module used by the Task 2 import form `from emotion_detection import emotion_detector`
+- `EmotionDetection/emotion_detection.py` – packaged application implementation
+- `EmotionDetection/__init__.py` – package export
 - `test_emotion_detection.py`
 - `server.py`
 - `templates/index.html`
