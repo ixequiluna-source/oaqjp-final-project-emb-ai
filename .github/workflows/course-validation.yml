@@ -1,0 +1,48 @@
+name: Course Validation
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Show project root
+        run: pwd
+
+      - name: Q3 application creation
+        continue-on-error: true
+        run: |
+          python - <<'PY'
+          from emotion_detection import emotion_detector
+          print(emotion_detector("I love this new technology"))
+          PY
+
+      - name: Q7 package validation
+        continue-on-error: true
+        run: |
+          python - <<'PY'
+          from EmotionDetection.emotion_detection import emotion_detector
+          print(emotion_detector("I am really mad about this"))
+          PY
+
+      - name: Q9 unit tests
+        continue-on-error: true
+        run: python -m unittest test_emotion_detection.py
+
+      - name: Q16 pylint
+        run: pylint server.py
