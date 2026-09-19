@@ -1,39 +1,95 @@
-# Final Project - Emotion Detector
+![Emotion Detector — applied NLP educational project](docs/assets/cover.svg)
 
-Final Project for the IBM/Coursera Python Project for AI & Application Development course.
+# Emotion Detector
 
-This project implements an AI-powered emotion detector using the Watson NLP Skills Network endpoint, packages the functionality as `EmotionDetection`, validates it with unit tests, deploys it with Flask, handles blank-input errors, and includes static code analysis.
+**A small, readable journey from text input to model output.**
 
-## Files
+A Python and Flask application that sends English text to the Watson NLP Skills Network service and returns scores for **anger, disgust, fear, joy and sadness**, plus the highest-scoring label.
 
-- `emotion_detection.py` – top-level compatibility module used by the Task 2 import form `from emotion_detection import emotion_detector`
-- `EmotionDetection/emotion_detection.py` – packaged application implementation
-- `EmotionDetection/__init__.py` – package export
-- `test_emotion_detection.py`
-- `server.py`
-- `templates/index.html`
-- `static/mywebscript.js`
+Built as the final project for the **IBM/Coursera Python Project for AI & Application Development** course. The course context is part of the project's provenance; this repository does not implement or train the underlying Watson model.
 
-## Setup
+[Run locally](#run-locally) · [How it works](#how-it-works) · [Verification](docs/VERIFICATION.md) · [Español](README.es.md) · [Ixequi Luna](https://ixequiluna.ai)
 
-```bash
-python3 -m venv .venv
-.venv/bin/python -m pip install -r requirements.txt
+[![Course validation](https://github.com/ixequiluna-source/oaqjp-final-project-emb-ai/actions/workflows/course-validation.yml/badge.svg)](https://github.com/ixequiluna-source/oaqjp-final-project-emb-ai/actions)
+
+## What this project demonstrates
+
+| Layer | Engineering focus |
+| --- | --- |
+| Python package | A compact API wrapper with explicit request timeout and a consistent result shape. |
+| Flask route | Input handling, formatted results and a 503 response when the provider request fails. |
+| Browser interface | Text input connected to the application endpoint. |
+| Tests | Deterministic, mocked examples covering all five dominant labels. |
+
+## Run locally
+
+Requires Python 3.11 or later and access to the external Skills Network endpoint for live inference.
+
+```sh
+git clone https://github.com/ixequiluna-source/oaqjp-final-project-emb-ai.git
+cd oaqjp-final-project-emb-ai
+python -m venv .venv
 ```
 
-## Run
+Activate the environment:
 
-```bash
-.venv/bin/python server.py
+```sh
+# macOS / Linux
+source .venv/bin/activate
 ```
 
-## Test
-
-```bash
-.venv/bin/python -m unittest test_emotion_detection.py
-PYLINTHOME=.pylint.d .venv/bin/pylint server.py
+```powershell
+# Windows PowerShell
+.venv\Scripts\Activate.ps1
 ```
 
-The project depends on the public Watson NLP Skills Network endpoint. If that
-endpoint is unavailable, live emotion-score tests and the deployed Flask result
-for non-empty text will fail with a network error rather than fabricated scores.
+Then install, test and start:
+
+```sh
+python -m pip install -r requirements.txt
+python -m unittest test_emotion_detection.py -v
+python server.py
+```
+
+Open **http://localhost:5000**. Use non-sensitive sample text such as `I am glad this happened`. The supplied development server binds to all interfaces; keep it in a trusted local development environment.
+
+## How it works
+
+```mermaid
+flowchart LR
+  Text[English text] --> Flask[Flask route]
+  Flask --> Package[EmotionDetection package]
+  Package --> Watson[External Watson NLP service]
+  Watson --> Scores[Five scores + dominant label]
+  Scores --> Flask
+```
+
+```python
+from EmotionDetection import emotion_detector
+
+result = emotion_detector("I am glad this happened")
+print(result["dominant_emotion"])
+```
+
+The label depends on the external response. Unit tests substitute known responses to verify wrapper behavior; they do **not** establish model accuracy or provider availability. Empty input produces `None` values without sending a provider request. A network failure must not be replaced with invented scores.
+
+## Find your way around
+
+| File | Purpose |
+| --- | --- |
+| [Packaged implementation](EmotionDetection/emotion_detection.py) | Provider request and score extraction. |
+| [Server](server.py) | Flask routes and provider-unavailable response. |
+| [Tests](test_emotion_detection.py) | Mocked dominant-label checks. |
+| [Template](templates/index.html) | Browser interface. |
+| [Browser script](static/mywebscript.js) | Request and result rendering. |
+| [Compatibility module](emotion_detection.py) | Preserves the course's top-level import form. |
+
+## Current boundaries
+
+This is an educational integration, not a mental-health assessment or a production service. Text is sent to an external provider. The existing browser route uses a URL query parameter, so sample input can appear in access logs; use synthetic text only.
+
+The current frontend does not display non-200 failures, and successful provider payloads are not fully schema-validated. These are explicit next improvements, alongside a clearer loading/error experience and privacy-conscious request handling. [See the review](docs/VERIFICATION.md).
+
+## Author and provenance
+
+Project implementation maintained by **[Dr. Ixequi Luna](https://ixequiluna.ai)**, within the IBM/Coursera course context. Watson supplies the model inference. Existing course artifacts and history are retained.

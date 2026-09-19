@@ -41,7 +41,6 @@ jobs:
           PY
 
       - name: Q9 unit tests
-        continue-on-error: true
         run: python -m unittest test_emotion_detection.py
 
       - name: Q16 pylint

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 440" role="img" aria-labelledby="title desc">
+ <title id="title">Emotion Detector</title><desc id="desc">From a sentence to five model scores, with a small Python service.</desc>
+ <rect width="1200" height="440" rx="24" fill="#09151d"/>
+ <path d="M870 0v440M950 0v440M1030 0v440M1110 0v440M800 80h400M800 160h400M800 240h400" stroke="#193340" stroke-width="1"/>
+ <circle cx="1070" cy="115" r="60" fill="none" stroke="#b8b0ff" stroke-width="2"/><circle cx="1070" cy="115" r="37" fill="none" stroke="#385b65"/><path d="M1010 115h120M1070 55v120" stroke="#b8b0ff"/>
+ <g font-family="Arial,Helvetica,sans-serif"><text x="64" y="73" fill="#b8b0ff" font-size="14" letter-spacing="3">APPLIED NLP / EDUCATIONAL PROJECT</text>
+ <text x="60" y="159" fill="#f4f8fa" font-size="66" font-weight="700" letter-spacing="-2">Emotion Detector</text>
+ <text x="64" y="208" fill="#afc5cf" font-size="23">From a sentence to five model scores, with a small Python service.</text><rect x="64" y="268" width="340" height="110" rx="16" fill="#13232d" stroke="#29414c"/><text x="86" y="309" fill="#b8b0ff" font-size="13" letter-spacing="2">01 / INPUT</text><text x="86" y="348" fill="#e9f3f5" font-size="22">English text</text><rect x="422" y="268" width="340" height="110" rx="16" fill="#13232d" stroke="#29414c"/><text x="444" y="309" fill="#b8b0ff" font-size="13" letter-spacing="2">02 / MODEL</text><text x="444" y="348" fill="#e9f3f5" font-size="22">Watson NLP</text><rect x="780" y="268" width="340" height="110" rx="16" fill="#13232d" stroke="#29414c"/><text x="802" y="309" fill="#b8b0ff" font-size="13" letter-spacing="2">03 / OUTPUT</text><text x="802" y="348" fill="#e9f3f5" font-size="22">Five emotion scores</text>
+ <text x="64" y="413" fill="#9cb3bd" font-size="12" letter-spacing="2">IXEQUI LUNA / ENGINEERING PORTFOLIO</text></g></svg>
