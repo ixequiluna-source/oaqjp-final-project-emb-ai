@@ -15,7 +15,7 @@ Proyecto final del curso **IBM/Coursera Python Project for AI & Application Deve
 Sigue la [instalación para Windows, macOS y Linux](README.md#run-locally). Después:
 
 ```sh
-python -m unittest test_emotion_detection.py -v
+python -m unittest discover -v
 python server.py
 ```
 
@@ -28,4 +28,4 @@ Abre **http://localhost:5000** y utiliza una frase sintética en inglés. La inf
 - El timeout explícito y la respuesta 503 ante un fallo de red del proveedor.
 - Los cinco casos deterministas, uno por etiqueta dominante.
 
-El siguiente paso es mejorar la experiencia de carga y error, validar respuestas incompletas y cambiar el envío de texto para evitar parámetros en la URL. No se utiliza para diagnóstico ni con datos personales: el contenido se envía a un proveedor externo.
+La interfaz ya incorpora carga, recuperación de errores, cancelación al editar y cinco indicadores. El servidor valida respuestas incompletas y puntuaciones fuera de rango. El texto viaja en el cuerpo de POST, con límite de 2,000 caracteres; la ruta GET heredada permanece solo por compatibilidad con el curso. No se utiliza para diagnóstico ni con datos personales: el contenido se envía a un proveedor externo.

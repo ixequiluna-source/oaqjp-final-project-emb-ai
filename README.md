@@ -18,8 +18,8 @@ Built as the final project for the **IBM/Coursera Python Project for AI & Applic
 | --- | --- |
 | Python package | A compact API wrapper with explicit request timeout and a consistent result shape. |
 | Flask route | Input handling, formatted results and a 503 response when the provider request fails. |
-| Browser interface | Text input connected to the application endpoint. |
-| Tests | Deterministic, mocked examples covering all five dominant labels. |
+| Browser interface | Responsive interface, five score meters, loading, cancellation, error recovery and explicit provider disclosure. |
+| Tests | 15 deterministic Python tests plus Chromium/WebKit browser journeys; provider responses are mocked. |
 
 ## Run locally
 
@@ -47,11 +47,11 @@ Then install, test and start:
 
 ```sh
 python -m pip install -r requirements.txt
-python -m unittest test_emotion_detection.py -v
+python -m unittest discover -v
 python server.py
 ```
 
-Open **http://localhost:5000**. Use non-sensitive sample text such as `I am glad this happened`. The supplied development server binds to all interfaces; keep it in a trusted local development environment.
+Open **http://localhost:5000**. Use non-sensitive sample text such as `I am glad this happened`. The supplied development server binds to loopback (127.0.0.1).
 
 ## How it works
 
@@ -86,7 +86,7 @@ The label depends on the external response. Unit tests substitute known response
 
 ## Current boundaries
 
-This is an educational integration, not a mental-health assessment or a production service. Text is sent to an external provider. The existing browser route uses a URL query parameter, so sample input can appear in access logs; use synthetic text only.
+This is an educational integration, not a mental-health assessment or a production service. Text is sent to an external provider. The interface sends JSON with POST `/api/emotions`, limited to 2,000 characters, so submitted text is absent from the request URL. The legacy GET `/emotionDetector` route remains for course compatibility and can expose query text in access logs; do not use it for sensitive input. No authentication or production rate limiter is supplied.
 
 The current frontend does not display non-200 failures, and successful provider payloads are not fully schema-validated. These are explicit next improvements, alongside a clearer loading/error experience and privacy-conscious request handling. [See the review](docs/VERIFICATION.md).
 

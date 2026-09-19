@@ -1,5 +1,6 @@
 """Emotion detection using the Watson NLP service."""
 
+import math
 import requests
 
 EMOTION_ENDPOINT = (
@@ -43,7 +44,14 @@ def emotion_detector(text_to_analyze):
         return _empty_emotion_response()
 
     response.raise_for_status()
-    emotions = response.json()["emotionPredictions"][0]["emotion"]
-    emotion_scores = {emotion: emotions[emotion] for emotion in EMOTION_KEYS}
+    try:
+        emotions = response.json()["emotionPredictions"][0]["emotion"]
+        emotion_scores = {emotion: emotions[emotion] for emotion in EMOTION_KEYS}
+    except (ValueError, KeyError, IndexError, TypeError) as exc:
+        raise ValueError("Invalid provider response") from exc
+    for value in emotion_scores.values():
+        if (isinstance(value, bool) or not isinstance(value, (int, float))
+                or not math.isfinite(value) or not 0 <= value <= 1):
+            raise ValueError("Invalid provider score")
     emotion_scores["dominant_emotion"] = max(emotion_scores, key=emotion_scores.get)
     return emotion_scores

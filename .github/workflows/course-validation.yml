@@ -41,7 +41,7 @@ jobs:
           PY
 
       - name: Q9 unit tests
-        run: python -m unittest test_emotion_detection.py
+        run: python -m unittest discover -v
 
       - name: Q16 pylint
         run: pylint server.py

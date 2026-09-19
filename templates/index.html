@@ -1,26 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <script src="/static/mywebscript.js"></script>
-    <title>Emotion Detector</title>
-</head>
-<body>
-    <div class="container mt-5">
-        <div class="card">
-            <div class="card-body">
-                <h1 class="text-center">NLP - Emotion Detection</h1>
-                <div class="p-4">
-                    <label for="textToAnalyze" class="form-label">Please enter the text to be analyzed</label>
-                    <input type="text" class="form-control" id="textToAnalyze">
-                    <button onclick="RunSentimentAnalysis()" class="btn btn-secondary mt-4">Run Sentiment Analysis</button>
-                </div>
-                <h2 class="px-4">Result of Emotion Detection</h2>
-                <div id="system_response" class="p-4"></div>
-            </div>
-        </div>
-    </div>
-</body>
-</html>
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Explore five emotion scores with Watson NLP. An educational project by Ixequi Luna."><title>Emotion Detector · Ixequi Luna</title><link rel="stylesheet" href="/static/app.css"><script src="/static/mywebscript.js" defer></script></head>
+<body><a class="skip" href="#workspace">Skip to analyzer</a><header class="masthead"><a class="brand" href="https://ixequiluna.ai">IX <span>Ixequi Luna / Applied NLP</span></a><span class="pill">Educational project</span></header><main>
+<section class="intro"><p class="eyebrow">LANGUAGE, THROUGH A DIFFERENT LENS</p><h1>One sentence.<br><span>Five signals.</span></h1><p class="lede">Explore how a language model scores emotion in English text. A focused view of the output, with its limits in plain sight.</p></section>
+<section id="workspace" class="workspace" aria-label="Emotion analyzer"><form id="analyze-form" class="panel"><div class="section-label"><span>01 / YOUR INPUT</span><span>English text</span></div><label for="textToAnalyze">What would you like to explore?</label><textarea id="textToAnalyze" name="text" rows="6" maxlength="2000" required aria-describedby="privacy character-count" placeholder="I am glad this happened."></textarea><div class="input-meta"><span id="character-count">0 / 2,000</span><button type="button" class="text-button" id="clear">Clear</button></div><p class="examples-label">Start with an example</p><div class="examples"><button type="button" data-example="I am glad this happened.">A moment of joy</button><button type="button" data-example="I am worried about what comes next.">An uncertain moment</button><button type="button" data-example="I miss the people I used to see every day.">A memory</button></div><p id="privacy" class="note">Your text goes to Watson NLP Skills Network. Use fictional, non-sensitive examples. This is not a mental-health assessment.</p><button class="primary" id="analyze" type="submit">Analyze text ↗</button></form>
+<section class="panel result-panel" aria-labelledby="result-title" aria-busy="false" id="result-panel"><div class="section-label"><span>02 / MODEL OUTPUT</span><span>Five dimensions</span></div><h2 id="result-title">Make room for nuance.</h2><p id="system_response" role="status" aria-live="polite">Your results will appear here. Enter a sentence to begin.</p><div id="scores" hidden></div><p class="result-note">Scores are model outputs, not a diagnosis or a measured probability of someone's feelings. The highest score supplies the dominant label; scores need not sum to 100%.</p></section></section>
+<section class="context"><div><p class="eyebrow">SMALL SYSTEM. VISIBLE CONTRACT.</p><h2>Know what happens<br>between input and insight.</h2></div><ol><li><strong>Send</strong><span>A bounded request carries your text in its body.</span></li><li><strong>Validate</strong><span>The service checks all five model scores before displaying a result.</span></li><li><strong>Inspect</strong><span>Errors stay visible. Missing results never become invented scores.</span></li></ol></section></main><footer><span>Dr. Ixequi Luna · IBM/Coursera course project</span><a href="https://github.com/ixequiluna-source/oaqjp-final-project-emb-ai">Inspect the code ↗</a></footer></body></html>

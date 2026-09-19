@@ -1,0 +1,32 @@
+name: Browser recovery
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: pip install -r requirements.txt
+      - run: python -m unittest discover -v
+      - name: Install isolated browser tooling
+        run: |
+          npm install --prefix /tmp/demo-browser playwright@1.56.1
+          node /tmp/demo-browser/node_modules/playwright/cli.js install --with-deps chromium webkit
+      - name: Test interface against simulated provider responses
+        run: |
+          python server.py > /tmp/emotion-server.log 2>&1 &
+          for i in $(seq 1 30); do curl -fsS http://127.0.0.1:5000/ > /dev/null && break; sleep 1; done
+          NODE_PATH=/tmp/demo-browser/node_modules node test_browser.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: browser-evidence
+          path: artifacts/
